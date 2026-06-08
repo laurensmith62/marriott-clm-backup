@@ -109,21 +109,14 @@
     .pull-quote { font-size: 1.15rem; font-style: italic; color: var(--dark-mid); border-left: 3px solid var(--red); padding: 1.1rem 1.5rem; margin: 1.75rem 0; background: var(--white); border-radius: 0 4px 4px 0; }
 
     /* ─── STAKES ─── */
-    #stakes { background: var(--dark); }
-    #stakes .chapter { border-bottom-color: rgba(255,255,255,0.08); }
-    #stakes h2.ch-title { color: var(--white); }
-    #stakes .ch-lead { color: rgba(255,255,255,0.55); }
-    #stakes .ch-num { color: var(--red); }
-    #stakes .ch-tag { color: rgba(255,255,255,0.3); }
-    #stakes .ch-line { background: rgba(255,255,255,0.1); }
-    .stakes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; margin-bottom: 2rem; }
-    @media(max-width:600px){ .stakes-grid{ grid-template-columns:1fr; } }
-    .stake-cell { background: rgba(255,255,255,0.03); padding: 1.75rem 1.5rem; }
-    .sc-num { font-size: 2.4rem; color: var(--red); font-family: Georgia, serif; line-height: 1; margin-bottom: 0.35rem; }
-    .sc-label { font-size: 0.8rem; color: var(--white); font-family: Arial, sans-serif; font-weight: 700; margin-bottom: 0.35rem; }
-    .sc-sub { font-size: 0.78rem; color: rgba(255,255,255,0.42); font-family: Arial, sans-serif; line-height: 1.55; }
-    .stakes-note { background: rgba(180,31,58,0.08); border: 1px solid rgba(180,31,58,0.2); border-radius: 4px; padding: 1.25rem 1.5rem; font-size: 0.88rem; color: rgba(255,255,255,0.6); font-family: Arial, sans-serif; line-height: 1.7; }
-    .stakes-note strong { color: var(--red); }
+    .stakes-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .stake-card { display: grid; grid-template-columns: 6rem 1fr; gap: 1.25rem; align-items: start; background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 1.4rem 1.5rem; }
+    @media(max-width:560px){ .stake-card{ grid-template-columns:1fr; } }
+    .sc-num-wrap { text-align: center; padding-top: 0.15rem; }
+    .sc-num { font-size: 2rem; color: var(--red); font-family: Georgia, serif; line-height: 1; display: block; }
+    .sc-unit { font-size: 0.62rem; color: var(--muted); font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.2rem; display: block; }
+    .sc-label { font-size: 0.88rem; color: var(--dark); font-family: Arial, sans-serif; font-weight: 700; margin-bottom: 0.35rem; }
+    .sc-body { font-size: 0.84rem; color: #4a5568; font-family: Arial, sans-serif; line-height: 1.65; }
 
     /* ─── SOLUTION ─── */
     .sf-switcher { display: grid; grid-template-columns: 200px 1fr; gap: 1.5rem; margin-top: 2rem; align-items: start; }
@@ -304,26 +297,46 @@
           <h2 class="ch-title">Why This Matters <em>Now</em></h2>
           <p class="ch-lead">Three converging factors make this a now decision. The July 2026 go-live is not a soft target — it is the hard stop for every dependency in this plan.</p>
 
-          <div class="stakes-grid fade">
-            <div class="stake-cell" style="background:var(--white);">
-              <div class="sc-num">271M+</div>
-              <div class="sc-label">Bonvoy Member Profiles</div>
-              <div class="sc-sub">Transitioning from mainframe to Salesforce Loyalty Cloud — mission-critical loyalty data including points, tier status, and partner activity.</div>
+          <div class="stakes-list fade">
+            <div class="stake-card">
+              <div class="sc-num-wrap">
+                <span class="sc-num">271M+</span>
+                <span class="sc-unit">Members</span>
+              </div>
+              <div>
+                <div class="sc-label">Bonvoy Member Profiles at Stake</div>
+                <div class="sc-body">Marriott is migrating 271M+ Bonvoy member profiles from mainframe to Salesforce Loyalty Cloud — mission-critical data including points balances, tier status, partner activity, and full engagement history. A single unprotected corruption event could impact every one of them.</div>
+              </div>
             </div>
-            <div class="stake-cell" style="background:var(--white);">
-              <div class="sc-num">July '26</div>
-              <div class="sc-label">Hard Deadline</div>
-              <div class="sc-sub">Loyalty enrollment go-live targeted for July 2026. Backup + Archive must be activated and validated prior to production readiness.</div>
+            <div class="stake-card">
+              <div class="sc-num-wrap">
+                <span class="sc-num">July</span>
+                <span class="sc-unit">2026 Hard Stop</span>
+              </div>
+              <div>
+                <div class="sc-label">No Flexibility on the Go-Live Date</div>
+                <div class="sc-body">Loyalty enrollment go-live is targeted for July 2026. Backup + Archive must be activated, configured, and validated before that date — not after. There is no runway to retrofit resiliency once 271M member records are in production.</div>
+              </div>
             </div>
-            <div class="stake-cell" style="background:var(--white);">
-              <div class="sc-num">50 yr</div>
-              <div class="sc-label">Data Retention Requirement</div>
-              <div class="sc-sub">Certain Bonvoy member tiers carry a 50-year data retention requirement — far beyond standard enterprise data management practices.</div>
+            <div class="stake-card">
+              <div class="sc-num-wrap">
+                <span class="sc-num">50</span>
+                <span class="sc-unit">Year Retention</span>
+              </div>
+              <div>
+                <div class="sc-label">Regulatory Retention Requirement</div>
+                <div class="sc-body">Certain Bonvoy member tiers carry a 50-year data retention requirement — far beyond standard enterprise data management. This isn't a nice-to-have; it's a compliance obligation that requires an architected, auditable solution — not a manual workaround.</div>
+              </div>
             </div>
-            <div class="stake-cell" style="background:var(--white);">
-              <div class="sc-num">Apr '25</div>
-              <div class="sc-label">Empower Org Already Live</div>
-              <div class="sc-sub">Backup &amp; Recover already operational in Marriott's Empower org since April 2025 — proving the pattern before extending to Loyalty.</div>
+            <div class="stake-card">
+              <div class="sc-num-wrap">
+                <span class="sc-num">Apr</span>
+                <span class="sc-unit">'25 — Live</span>
+              </div>
+              <div>
+                <div class="sc-label">Already Proven in the Empower Org</div>
+                <div class="sc-body">Backup &amp; Recover has been operational in Marriott's Empower org since April 2025. The configuration patterns, playbooks, and team knowledge are already established — extending to Loyalty Cloud is an expansion, not a net-new implementation.</div>
+              </div>
             </div>
           </div>
 
